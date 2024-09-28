@@ -177,7 +177,10 @@ class _GameScreenState extends State<GameScreen> {
                     ScoreCard(score: game.score),
                     CustomGameButton(
                       onTap: () {
-                        Get.to(() => const GameSettingScreen());
+                        Get.to(() => GameSettingScreen(
+                              game: game,
+                            ));
+                        game.pauseEngine();
                       },
                       height: 35.w,
                       width: 35.w,
