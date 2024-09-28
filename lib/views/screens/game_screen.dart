@@ -20,7 +20,7 @@ import '../../utils/global.dart';
 import '../widgets/custom_game_button.dart';
 import '../widgets/overlay_screen.dart';
 
-import '../../game/brick_breaker.dart';
+import '../../models/brick_breaker.dart';
 import '../../utils/config.dart';
 import '../widgets/score_card.dart';
 

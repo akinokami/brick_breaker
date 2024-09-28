@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/sound_controller.dart';
 
-import '../../../game/brick_breaker.dart';
+import '../../../models/brick_breaker.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/dimen_const.dart';
 import '../../widgets/custom_card.dart';
