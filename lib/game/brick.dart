@@ -1,3 +1,5 @@
+import 'package:brick_breaker/services/local_storage.dart';
+import 'package:brick_breaker/utils/enum.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,10 @@ class Brick extends RectangleComponent
 
     if (game.world.children.query<Brick>().length == 1) {
       game.playState = PlayState.won;
+      if (game.score.value >= game.best.value) {
+        game.best.value = game.score.value;
+        LocalStorage.instance.write(StorageKey.best.name, game.best.value);
+      }
       game.world.removeAll(game.world.children.query<Ball>());
       game.world.removeAll(game.world.children.query<Bat>());
     }

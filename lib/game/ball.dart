@@ -1,4 +1,6 @@
+import 'package:brick_breaker/services/local_storage.dart';
 import 'package:brick_breaker/utils/colors.dart';
+import 'package:brick_breaker/utils/enum.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
@@ -49,6 +51,11 @@ class Ball extends CircleComponent
             delay: 0.35,
             onComplete: () {
               game.playState = PlayState.gameOver;
+              if (game.score.value >= game.best.value) {
+                game.best.value = game.score.value;
+                LocalStorage.instance
+                    .write(StorageKey.best.name, game.best.value);
+              }
             }));
       }
     } else if (other is Bat) {

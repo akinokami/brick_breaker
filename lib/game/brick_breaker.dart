@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:brick_breaker/services/local_storage.dart';
 import 'package:brick_breaker/utils/colors.dart';
+import 'package:brick_breaker/utils/enum.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -24,6 +26,7 @@ class BrickBreaker extends FlameGame
         );
 
   final ValueNotifier<int> score = ValueNotifier(0);
+  final ValueNotifier<int> best = ValueNotifier(0);
   final rand = math.Random();
   double get width => size.x;
   double get height => size.y;
@@ -47,7 +50,6 @@ class BrickBreaker extends FlameGame
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
-
     camera.viewfinder.anchor = Anchor.topLeft;
 
     world.add(PlayArea());
@@ -61,7 +63,6 @@ class BrickBreaker extends FlameGame
     world.removeAll(world.children.query<Ball>());
     world.removeAll(world.children.query<Bat>());
     world.removeAll(world.children.query<Brick>());
-
     score.value = 0; // Add this line
     playState = PlayState.playing;
 

@@ -5,6 +5,7 @@ import 'package:brick_breaker/utils/color_const.dart';
 import 'package:brick_breaker/utils/colors.dart';
 import 'package:brick_breaker/utils/enum.dart';
 import 'package:brick_breaker/views/screens/settings/game_setting_screen.dart';
+import 'package:brick_breaker/views/widgets/best_card.dart';
 import 'package:brick_breaker/views/widgets/custom_button.dart';
 import 'package:brick_breaker/views/widgets/custom_text.dart';
 import 'package:flame/game.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../controller/sound_controller.dart';
 import '../../utils/dimen_const.dart';
 import '../../utils/global.dart';
 import '../widgets/custom_game_button.dart';
@@ -38,7 +40,9 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
+
     game = BrickBreaker();
+    game.best.value = LocalStorage.instance.read(StorageKey.best.name) ?? 0;
     first = LocalStorage.instance.read(StorageKey.first.name) ?? '';
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {
@@ -144,6 +148,8 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final soundController = Get.put(SoundController());
+    soundController.playSound();
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -167,6 +173,7 @@ class _GameScreenState extends State<GameScreen> {
                       color2: Colors.red.shade300,
                       color3: Colors.red,
                     ),
+                    BestCard(best: game.best),
                     ScoreCard(score: game.score),
                     CustomGameButton(
                       onTap: () {

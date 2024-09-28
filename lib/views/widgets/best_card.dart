@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class ScoreCard extends StatelessWidget {
-  const ScoreCard({
+class BestCard extends StatelessWidget {
+  const BestCard({
     super.key,
-    required this.score,
+    required this.best,
   });
 
-  final ValueNotifier<int> score;
+  final ValueNotifier<int> best;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
-      valueListenable: score,
-      builder: (context, score, child) {
+      valueListenable: best,
+      builder: (context, best, child) {
         return CustomText(
-          text: "${'score'.tr}: $score".toUpperCase(),
+          text: "${'best'.tr}: $best".toUpperCase(),
           fontSize: 14.sp,
         );
       },
