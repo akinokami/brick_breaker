@@ -40,7 +40,7 @@ const brickColors = [
 // const difficultyModifier = 1.03;
 
 double gameWidth = 1.sw * 0.97;
-double gameHeight = 1.sh * 0.90;
+double gameHeight = 1.sh > 850 ? 1.sh * 0.85 : 1.sh * 0.90;
 double ballRadius = gameWidth * 0.02;
 double batWidth = gameWidth * 0.2;
 double batHeight = ballRadius * 2;
