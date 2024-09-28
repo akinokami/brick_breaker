@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:brick_breaker/services/local_storage.dart';
 import 'package:brick_breaker/utils/colors.dart';
-import 'package:brick_breaker/utils/enum.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
