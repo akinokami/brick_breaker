@@ -21,6 +21,7 @@ class SoundController extends GetxController {
   }
 
   void playSound() async {
+    player.setReleaseMode(ReleaseMode.loop);
     player.play(AssetSource('theme_sound.mp3'));
   }
 

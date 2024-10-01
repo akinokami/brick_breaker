@@ -40,7 +40,6 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-
     game = BrickBreaker();
     game.best.value = LocalStorage.instance.read(StorageKey.best.name) ?? 0;
     first = LocalStorage.instance.read(StorageKey.first.name) ?? '';
