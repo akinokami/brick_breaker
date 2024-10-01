@@ -1,5 +1,4 @@
 import 'package:brick_breaker/services/local_storage.dart';
-import 'package:brick_breaker/utils/color_const.dart';
 
 import 'package:brick_breaker/utils/enum.dart';
 import 'package:brick_breaker/views/widgets/best_card.dart';
