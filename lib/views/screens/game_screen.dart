@@ -1,4 +1,5 @@
 import 'package:brick_breaker/services/local_storage.dart';
+import 'package:brick_breaker/utils/color_const.dart';
 
 import 'package:brick_breaker/utils/enum.dart';
 import 'package:brick_breaker/views/widgets/best_card.dart';
@@ -9,6 +10,8 @@ import 'package:get/get.dart';
 
 import '../../controller/sound_controller.dart';
 
+import '../../utils/dimen_const.dart';
+import '../widgets/custom_text.dart';
 import '../widgets/overlay_screen.dart';
 
 import '../../models/brick_breaker.dart';
@@ -23,14 +26,17 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  late final BrickBreaker game;
+  final BrickBreaker game = BrickBreaker();
 
   @override
   void initState() {
     super.initState();
-    game = BrickBreaker();
     game.best.value = LocalStorage.instance.read(StorageKey.best.name) ?? 0;
 
+    startGame();
+  }
+
+  void startGame() {
     Future.delayed(const Duration(microseconds: 3000), () {
       game.onTap();
     });
@@ -154,14 +160,190 @@ class _GameScreenState extends State<GameScreen> {
                             title: 'tap_to_play'.tr,
                             subtitle: 'arrow_swipe'.tr,
                           ),
-                      PlayState.gameOver.name: (context, game) => OverlayScreen(
-                            title: 'game_over'.tr,
-                            subtitle: 'tap_to_play_again'.tr,
-                          ),
-                      PlayState.won.name: (context, game) => OverlayScreen(
-                            title: 'you_win'.tr,
-                            subtitle: 'tap_to_play_again'.tr,
-                          ),
+                      PlayState.gameOver.name: (context, game) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) async {
+                          return showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return WillPopScope(
+                                onWillPop: () async {
+                                  Navigator.of(context).pop();
+                                  Future.delayed(
+                                      const Duration(microseconds: 3000), () {
+                                    startGame();
+                                  });
+                                  bool shouldClose = false;
+                                  return shouldClose;
+                                },
+                                child: Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  elevation: 16,
+                                  child: Container(
+                                    padding: EdgeInsets.all(15.w),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        CustomText(
+                                          text: 'game_over'.tr,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        kSizedBoxH10,
+                                        CustomText(
+                                            text: 'are_you_want_to_replay'.tr),
+                                        kSizedBoxH10,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).pop();
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                foregroundColor: Colors.white,
+                                                shadowColor: Colors.redAccent,
+                                              ),
+                                              child: CustomText(
+                                                text: 'no'.tr,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                Future.delayed(
+                                                    const Duration(
+                                                        microseconds: 3000),
+                                                    () {
+                                                  startGame();
+                                                });
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.green,
+                                                foregroundColor: Colors.white,
+                                                shadowColor: Colors.greenAccent,
+                                              ),
+                                              child: CustomText(
+                                                text: 'yes'.tr,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        });
+                        return Container();
+                        // return OverlayScreen(
+                        //   title: 'game_over'.tr,
+                        //   subtitle: 'tap_to_play_again'.tr,
+                        // );
+                      },
+                      PlayState.won.name: (context, game) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) async {
+                          return showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return WillPopScope(
+                                onWillPop: () async {
+                                  Navigator.of(context).pop();
+                                  Future.delayed(
+                                      const Duration(microseconds: 3000), () {
+                                    startGame();
+                                  });
+                                  bool shouldClose = false;
+                                  return shouldClose;
+                                },
+                                child: Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  elevation: 16,
+                                  child: Container(
+                                    padding: EdgeInsets.all(15.w),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        CustomText(
+                                          text: 'you_win'.tr,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        kSizedBoxH10,
+                                        CustomText(
+                                            text: 'are_you_want_to_replay'.tr),
+                                        kSizedBoxH10,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).pop();
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                foregroundColor: Colors.white,
+                                                shadowColor: Colors.redAccent,
+                                              ),
+                                              child: CustomText(
+                                                text: 'no'.tr,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                Future.delayed(
+                                                    const Duration(
+                                                        microseconds: 3000),
+                                                    () {
+                                                  startGame();
+                                                });
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.green,
+                                                foregroundColor: Colors.white,
+                                                shadowColor: Colors.greenAccent,
+                                              ),
+                                              child: CustomText(
+                                                text: 'yes'.tr,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        });
+                        return Container();
+                      }
+                      // OverlayScreen(
+                      //       title: 'you_win'.tr,
+                      //       subtitle: 'tap_to_play_again'.tr,
+                      //     ),
                     },
                   ),
                 ),

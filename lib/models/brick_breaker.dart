@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:brick_breaker/utils/colors.dart';
+import 'package:brick_breaker/utils/constants.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/utils.dart';
 
 import 'components.dart';
 import '../utils/config.dart';

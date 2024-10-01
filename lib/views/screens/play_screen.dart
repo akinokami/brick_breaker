@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:brick_breaker/utils/dimen_const.dart';
 import 'package:brick_breaker/utils/global.dart';
 import 'package:brick_breaker/views/screens/game_screen.dart';
@@ -5,6 +8,7 @@ import 'package:brick_breaker/views/screens/settings/game_setting_screen.dart';
 import 'package:brick_breaker/views/widgets/custom_button.dart';
 import 'package:brick_breaker/views/widgets/custom_game_button.dart';
 import 'package:brick_breaker/views/widgets/custom_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,7 +19,6 @@ import '../../models/brick_breaker.dart';
 import '../../services/local_storage.dart';
 import '../../utils/color_const.dart';
 import '../../utils/enum.dart';
-import '../widgets/best_card.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -33,8 +36,6 @@ class _PlayScreenState extends State<PlayScreen> {
   @override
   void initState() {
     super.initState();
-    game = BrickBreaker();
-    game.best.value = LocalStorage.instance.read(StorageKey.best.name) ?? 0;
 
     first = LocalStorage.instance.read(StorageKey.first.name) ?? '';
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -137,6 +138,10 @@ class _PlayScreenState extends State<PlayScreen> {
         // print("Error fetching SharedPreferences: $e");
       }
     });
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
   }
 
   @override
@@ -157,7 +162,14 @@ class _PlayScreenState extends State<PlayScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BestCard(best: game.best),
+                CustomText(
+                  text:
+                      "${'best'.tr} ${'score'.tr}: ${LocalStorage.instance.read(StorageKey.best.name) ?? 0}"
+                          .toUpperCase(),
+                  fontSize: 14.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -174,9 +186,7 @@ class _PlayScreenState extends State<PlayScreen> {
                 ),
                 CustomGameButton(
                   onTap: () {
-                    Get.to(() => GameSettingScreen(
-                          score: game.best.value,
-                        ));
+                    Get.to(() => GameSettingScreen());
                   },
                   width: 0.2.sh,
                   text: 'settings'.tr,
@@ -187,7 +197,69 @@ class _PlayScreenState extends State<PlayScreen> {
                 ),
                 CustomGameButton(
                   onTap: () {
-                    //Get.to(() => const LevelScreen());
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          elevation: 16,
+                          child: Container(
+                            padding: EdgeInsets.all(15.w),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                CustomText(
+                                  text: 'exit'.tr,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                kSizedBoxH10,
+                                CustomText(text: 'are_you_sure_to_exit'.tr),
+                                kSizedBoxH10,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.red,
+                                        foregroundColor: Colors.white,
+                                        shadowColor: Colors.redAccent,
+                                      ),
+                                      child: CustomText(
+                                        text: 'no'.tr,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        exit(0);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.green,
+                                        foregroundColor: Colors.white,
+                                        shadowColor: Colors.greenAccent,
+                                      ),
+                                      child: CustomText(
+                                        text: 'yes'.tr,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                   width: 0.2.sh,
                   color1: Colors.red,

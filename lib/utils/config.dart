@@ -39,18 +39,18 @@ const brickColors = [
 // const brickHeight = gameHeight * 0.03;
 // const difficultyModifier = 1.03;
 
-double gameWidth = 1.sw * 0.95;
+double gameWidth = 1.sw * 0.96; //0.95
 double gameHeight = 1.sh > 850
-    ? 1.sh * 0.85
+    ? 1.sh * 0.87 //0.85
     : 850 > 1.sh && 1.sh > 750
         ? 1.sh * 0.85
         : 1.sh * 0.90;
 double ballRadius = gameWidth * 0.02;
-double batWidth = gameWidth * 0.2;
+double batWidth = gameWidth * 0.2; //* 0.2;
 double batHeight = ballRadius * 2;
 double batStep = gameWidth * 0.05;
 double brickGutter = gameWidth * 0.015;
 double brickWidth =
     (gameWidth - (brickGutter * (brickColors.length + 1))) / brickColors.length;
 double brickHeight = gameHeight * 0.04;
-double difficultyModifier = 1.03;
+double difficultyModifier = 1.03;//1.03;

@@ -1,3 +1,5 @@
+import 'package:brick_breaker/services/local_storage.dart';
+import 'package:brick_breaker/utils/enum.dart';
 import 'package:brick_breaker/views/screens/settings/game_language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +14,7 @@ import '../../widgets/custom_text.dart';
 import 'game_policy_screen.dart';
 
 class GameSettingScreen extends StatelessWidget {
-  final int score;
-  const GameSettingScreen({super.key, required this.score});
+  const GameSettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -105,10 +106,14 @@ class GameSettingScreen extends StatelessWidget {
                           SizedBox(
                             width: 10.w,
                           ),
-                          CustomText(text: 'best'.tr),
+                          CustomText(
+                              text:
+                                  '${'best'.tr.toUpperCase()} ${'score'.tr.toUpperCase()}'),
                         ],
                       ),
-                      CustomText(text: score.toString()),
+                      CustomText(
+                          text:
+                              "${LocalStorage.instance.read(StorageKey.best.name) ?? 0}"),
                     ],
                   ),
                 ),

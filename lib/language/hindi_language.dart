@@ -30,7 +30,7 @@ class HiLanguage {
     'tap_to_play_again': 'दोबारा चलाने के लिए टैप करें',
     'you_win': 'आप जीते !',
     'best': 'श्रेष्ठ',
-    'exit': 'Exit',
-    'are_you_sure_to_exit': 'Are you sure to exit?'
+    'exit': 'बाहर निकलना',
+    'are_you_sure_to_exit': 'क्या आप वाकई बाहर निकलना चाहते हों?'
   };
 }

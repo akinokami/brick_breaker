@@ -31,6 +31,6 @@ class EnLanguage {
     'you_win': 'Y O U   W O N !',
     'best': 'BEST',
     'exit': 'Exit',
-    'are_you_sure_to_exit': 'Are you sure to exit?'
+    'are_you_sure_to_exit': 'Are you sure to exit?',
   };
 }
