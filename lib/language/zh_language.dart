@@ -25,10 +25,12 @@ class ZhLanguage {
     'level_complete': '等級完成。',
     'next': '下一個',
     'level': '等級',
-    'tap_to_play': '點擊即可玩',
+    'tap_to_play': '點擊開始',
     'arrow_swipe': '使用箭頭鍵或滑動',
     'tap_to_play_again': '點擊再次播放',
     'you_win': '你贏了 ！',
-    'best': '最好的'
+    'best': '最好的',
+    'exit': '出口',
+    'are_you_sure_to_exit': '您確定要退出嗎?'
   };
 }

@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:brick_breaker/services/local_storage.dart';
 
 import 'package:brick_breaker/utils/enum.dart';
-import 'package:brick_breaker/views/screens/settings/game_setting_screen.dart';
 import 'package:brick_breaker/views/widgets/best_card.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +30,10 @@ class _GameScreenState extends State<GameScreen> {
     super.initState();
     game = BrickBreaker();
     game.best.value = LocalStorage.instance.read(StorageKey.best.name) ?? 0;
+
+    Future.delayed(const Duration(microseconds: 3000), () {
+      game.onTap();
+    });
   }
 
   @override

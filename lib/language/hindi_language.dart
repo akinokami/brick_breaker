@@ -25,10 +25,12 @@ class HiLanguage {
     'level_complete': 'स्तर पूर्ण।',
     'next': 'अगला',
     'level': 'स्तर',
-    'tap_to_play': 'खेलने के लिए टैप करें',
+    'tap_to_play': 'शरू करने के लिए टैप करें',
     'arrow_swipe': 'तीर कुंजियों का उपयोग करें या स्वाइप करें',
     'tap_to_play_again': 'दोबारा चलाने के लिए टैप करें',
     'you_win': 'आप जीते !',
-    'best': 'श्रेष्ठ'
+    'best': 'श्रेष्ठ',
+    'exit': 'Exit',
+    'are_you_sure_to_exit': 'Are you sure to exit?'
   };
 }

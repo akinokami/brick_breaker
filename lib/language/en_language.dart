@@ -25,10 +25,12 @@ class EnLanguage {
     'level_complete': 'Level completed.',
     'next': 'Next',
     'level': 'Level',
-    'tap_to_play': 'TAP TO PLAY',
+    'tap_to_play': 'TAP TO START',
     'arrow_swipe': 'Use arrow keys or swipe',
     'tap_to_play_again': 'Tap to Play Again',
     'you_win': 'Y O U   W O N !',
-    'best': 'BEST'
+    'best': 'BEST',
+    'exit': 'Exit',
+    'are_you_sure_to_exit': 'Are you sure to exit?'
   };
 }

@@ -23,10 +23,12 @@ class ViLanguage {
     'level_complete': 'Đã hoàn thành cấp độ.',
     'next': 'Kế tiếp',
     'level': 'Mức độ',
-    'tap_to_play': 'NHẤN ĐỂ CHƠI',
+    'tap_to_play': 'NHẤN ĐỂ BẮT ĐẦU',
     'arrow_swipe': 'Sử dụng phím mũi tên hoặc vuốt',
     'tap_to_play_again': 'Nhấn để chơi lại',
     'you_win': 'BẠN Ố Ố Ố N!',
-    'best': 'TỐT NHẤT'
+    'best': 'TỐT NHẤT',
+    'exit': 'Ra',
+    'are_you_sure_to_exit': 'Bạn có chắc chắn thoát ra không?'
   };
 }

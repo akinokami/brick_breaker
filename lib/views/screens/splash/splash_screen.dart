@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:brick_breaker/views/screens/game_screen.dart';
 import 'package:brick_breaker/views/screens/play_screen.dart';
 import 'package:brick_breaker/views/screens/splash/circle_transition_clipper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
