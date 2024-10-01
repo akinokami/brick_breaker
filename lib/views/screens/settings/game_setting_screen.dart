@@ -7,10 +7,9 @@ import 'package:get/get.dart';
 import '../../../controller/sound_controller.dart';
 
 import '../../../models/brick_breaker.dart';
-import '../../../utils/colors.dart';
+
 import '../../../utils/dimen_const.dart';
 import '../../widgets/custom_card.dart';
-import '../../widgets/custom_game_button.dart';
 import '../../widgets/custom_text.dart';
 import 'game_policy_screen.dart';
 
@@ -30,31 +29,54 @@ class GameSettingScreen extends StatelessWidget {
       child: Scaffold(
           body: SafeArea(
         child: Container(
-          color: GameColors.bgColor,
-          // decoration: const BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage(
-          //       "assets/bg.webp",
-          //     ),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
+          // color: GameColors.bgColor,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/bg.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.all(10.w),
             child: ListView(
               children: [
                 Row(
                   children: [
-                    CustomGameButton(
+                    InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
                         game.resumeEngine();
                       },
-                      height: 35.w,
-                      width: 35.w,
-                      icon: Icons.arrow_back,
-                      iconColor: Colors.white,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/btn_bg.png",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: 35.w,
+                        width: 35.w,
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 24.w,
+                        ),
+                      ),
                     ),
+                    // CustomGameButton(
+                    //   onTap: () {
+                    //     Navigator.of(context).pop();
+                    //     game.resumeEngine();
+                    //   },
+                    //   height: 35.w,
+                    //   width: 35.w,
+                    //   icon: Icons.arrow_back,
+                    //   iconColor: Colors.white,
+                    // ),
                     SizedBox(
                       width: 10.w,
                     ),
@@ -62,11 +84,15 @@ class GameSettingScreen extends StatelessWidget {
                       text: 'settings'.tr,
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     )
                   ],
                 ),
                 kSizedBoxH10,
-                CustomText(text: 'general'.tr),
+                CustomText(
+                  text: 'general'.tr,
+                  color: Colors.white,
+                ),
                 SizedBox(height: 5.h),
                 GestureDetector(
                   onTap: () {
@@ -150,7 +176,10 @@ class GameSettingScreen extends StatelessWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                CustomText(text: 'other'.tr),
+                CustomText(
+                  text: 'other'.tr,
+                  color: Colors.white,
+                ),
                 SizedBox(height: 5.h),
                 GestureDetector(
                   onTap: () {

@@ -5,7 +5,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../../utils/dimen_const.dart';
 import '../../../utils/enum.dart';
 import '../../../utils/global.dart';
-import '../../widgets/custom_game_button.dart';
 
 class GamePolicyScreen extends StatefulWidget {
   const GamePolicyScreen({super.key});
@@ -41,15 +40,37 @@ class _GamePolicyScreenState extends State<GamePolicyScreen> {
               padding: EdgeInsets.all(10.w),
               child: Row(
                 children: [
-                  CustomGameButton(
+                  InkWell(
                     onTap: () {
                       Navigator.of(context).pop();
                     },
-                    height: 35.w,
-                    width: 35.w,
-                    icon: Icons.arrow_back,
-                    iconColor: Colors.white,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            "assets/btn_bg.png",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      height: 35.w,
+                      width: 35.w,
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 24.w,
+                      ),
+                    ),
                   ),
+                  // CustomGameButton(
+                  //   onTap: () {
+                  //     Navigator.of(context).pop();
+                  //   },
+                  //   height: 35.w,
+                  //   width: 35.w,
+                  //   icon: Icons.arrow_back,
+                  //   iconColor: Colors.white,
+                  // ),
                 ],
               ),
             ),

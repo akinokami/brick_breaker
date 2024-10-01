@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:brick_breaker/utils/colors.dart';
 import 'package:brick_breaker/views/screens/game_screen.dart';
 import 'package:brick_breaker/views/screens/splash/circle_transition_clipper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,7 +77,15 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-        color: GameColors.bgColor,
+        // color: GameColors.bgColor,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/splash.png",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

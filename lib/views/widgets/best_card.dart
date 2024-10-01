@@ -19,6 +19,8 @@ class BestCard extends StatelessWidget {
         return CustomText(
           text: "${'best'.tr}: $best".toUpperCase(),
           fontSize: 14.sp,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         );
       },
     );

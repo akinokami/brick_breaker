@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:brick_breaker/services/local_storage.dart';
 import 'package:brick_breaker/utils/color_const.dart';
-import 'package:brick_breaker/utils/colors.dart';
+
 import 'package:brick_breaker/utils/enum.dart';
 import 'package:brick_breaker/views/screens/settings/game_setting_screen.dart';
 import 'package:brick_breaker/views/widgets/best_card.dart';
@@ -17,7 +17,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../controller/sound_controller.dart';
 import '../../utils/dimen_const.dart';
 import '../../utils/global.dart';
-import '../widgets/custom_game_button.dart';
 import '../widgets/overlay_screen.dart';
 
 import '../../models/brick_breaker.dart';
@@ -152,7 +151,15 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: GameColors.bgColor,
+          // color: GameColors.bgColor,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/bg.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             children: [
               Padding(
@@ -160,32 +167,67 @@ class _GameScreenState extends State<GameScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomGameButton(
+                    InkWell(
                       onTap: () {
                         exit(0);
                       },
-                      height: 35.w,
-                      width: 35.w,
-                      icon: Icons.close,
-                      iconColor: Colors.white,
-                      color1: Colors.red,
-                      color2: Colors.red.shade300,
-                      color3: Colors.red,
+                      child: Image.asset(
+                        'assets/close.png',
+                        height: 38.w,
+                        width: 38.w,
+                      ),
                     ),
+                    // CustomGameButton(
+                    //   onTap: () {
+                    //     exit(0);
+                    //   },
+                    //   height: 35.w,
+                    //   width: 35.w,
+                    //   icon: Icons.close,
+                    //   iconColor: Colors.white,
+                    //   color1: Colors.red,
+                    //   color2: Colors.red.shade300,
+                    //   color3: Colors.red,
+                    // ),
                     BestCard(best: game.best),
                     ScoreCard(score: game.score),
-                    CustomGameButton(
+                    InkWell(
                       onTap: () {
                         Get.to(() => GameSettingScreen(
                               game: game,
                             ));
                         game.pauseEngine();
                       },
-                      height: 35.w,
-                      width: 35.w,
-                      icon: Icons.settings,
-                      iconColor: Colors.white,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/btn_bg.png",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: 35.w,
+                        width: 35.w,
+                        child: Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                          size: 24.w,
+                        ),
+                      ),
                     ),
+                    // CustomGameButton(
+                    //   onTap: () {
+                    //     Get.to(() => GameSettingScreen(
+                    //           game: game,
+                    //         ));
+                    //     game.pauseEngine();
+                    //   },
+                    //   height: 35.w,
+                    //   width: 35.w,
+                    //   icon: Icons.settings,
+                    //   iconColor: Colors.white,
+                    // ),
                   ],
                 ),
               ),

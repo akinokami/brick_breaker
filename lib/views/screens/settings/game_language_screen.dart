@@ -4,11 +4,9 @@ import 'package:get/get.dart';
 
 import '../../../controller/language_controller.dart';
 import '../../../utils/color_const.dart';
-import '../../../utils/colors.dart';
 import '../../../utils/dimen_const.dart';
 import '../../../utils/enum.dart';
 import '../../widgets/custom_card.dart';
-import '../../widgets/custom_game_button.dart';
 import '../../widgets/custom_text.dart';
 
 class GameLanguageScreen extends StatelessWidget {
@@ -20,15 +18,15 @@ class GameLanguageScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: GameColors.bgColor,
-          // decoration: const BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage(
-          //       "assets/bg.webp",
-          //     ),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
+          //color: GameColors.bgColor,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/bg.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.all(10.w),
             child: Column(
@@ -36,15 +34,37 @@ class GameLanguageScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CustomGameButton(
+                    InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      height: 35.w,
-                      width: 35.w,
-                      icon: Icons.arrow_back,
-                      iconColor: Colors.white,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/btn_bg.png",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: 35.w,
+                        width: 35.w,
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 24.w,
+                        ),
+                      ),
                     ),
+                    // CustomGameButton(
+                    //   onTap: () {
+                    //     Navigator.of(context).pop();
+                    //   },
+                    //   height: 35.w,
+                    //   width: 35.w,
+                    //   icon: Icons.arrow_back,
+                    //   iconColor: Colors.white,
+                    // ),
                     SizedBox(
                       width: 10.w,
                     ),
@@ -52,6 +72,7 @@ class GameLanguageScreen extends StatelessWidget {
                       text: 'change_language'.tr,
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     )
                   ],
                 ),

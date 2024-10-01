@@ -21,12 +21,12 @@ class OverlayScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 16.sp),
+            style: TextStyle(fontSize: 16.sp, color: Colors.white),
             //style: Theme.of(context).textTheme.headlineLarge,
           ).animate().slideY(duration: 750.ms, begin: -3, end: 0),
           const SizedBox(height: 16),
           Text(
-            subtitle, style: TextStyle(fontSize: 14.sp),
+            subtitle, style: TextStyle(fontSize: 14.sp, color: Colors.white),
             //style: Theme.of(context).textTheme.headlineSmall,
           )
               .animate(onPlay: (controller) => controller.repeat())

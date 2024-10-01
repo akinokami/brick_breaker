@@ -19,6 +19,8 @@ class ScoreCard extends StatelessWidget {
         return CustomText(
           text: "${'score'.tr}: $score".toUpperCase(),
           fontSize: 14.sp,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         );
       },
     );
