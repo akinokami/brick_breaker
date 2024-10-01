@@ -6,16 +6,14 @@ import 'package:get/get.dart';
 
 import '../../../controller/sound_controller.dart';
 
-import '../../../models/brick_breaker.dart';
-
 import '../../../utils/dimen_const.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/custom_text.dart';
 import 'game_policy_screen.dart';
 
 class GameSettingScreen extends StatelessWidget {
-  final BrickBreaker game;
-  const GameSettingScreen({super.key, required this.game});
+  final int score;
+  const GameSettingScreen({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class GameSettingScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pop();
-        game.resumeEngine();
+        // game.resumeEngine();
         return false;
       },
       child: Scaffold(
@@ -47,7 +45,7 @@ class GameSettingScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
-                        game.resumeEngine();
+                        // game.resumeEngine();
                       },
                       child: Container(
                         decoration: const BoxDecoration(
@@ -87,6 +85,32 @@ class GameSettingScreen extends StatelessWidget {
                       color: Colors.white,
                     )
                   ],
+                ),
+                kSizedBoxH10,
+                CustomText(
+                  text: 'score'.tr,
+                  color: Colors.white,
+                ),
+                SizedBox(height: 5.h),
+                CustomCard(
+                  widget: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.score_outlined,
+                            size: 18.sp,
+                          ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          CustomText(text: 'best'.tr),
+                        ],
+                      ),
+                      CustomText(text: score.toString()),
+                    ],
+                  ),
                 ),
                 kSizedBoxH10,
                 CustomText(

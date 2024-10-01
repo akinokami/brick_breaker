@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:brick_breaker/views/screens/game_screen.dart';
+import 'package:brick_breaker/views/screens/play_screen.dart';
 import 'package:brick_breaker/views/screens/splash/circle_transition_clipper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _goToGame() {
     final route = PageRouteBuilder(
-      pageBuilder: (_, animation, secondaryAnimation) => const GameScreen(),
+      pageBuilder: (_, animation, secondaryAnimation) => const PlayScreen(),
       transitionDuration: const Duration(milliseconds: 1500),
       transitionsBuilder: (
         context,

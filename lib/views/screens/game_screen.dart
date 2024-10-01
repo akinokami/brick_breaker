@@ -1,22 +1,17 @@
 import 'dart:io';
 
 import 'package:brick_breaker/services/local_storage.dart';
-import 'package:brick_breaker/utils/color_const.dart';
 
 import 'package:brick_breaker/utils/enum.dart';
 import 'package:brick_breaker/views/screens/settings/game_setting_screen.dart';
 import 'package:brick_breaker/views/widgets/best_card.dart';
-import 'package:brick_breaker/views/widgets/custom_button.dart';
-import 'package:brick_breaker/views/widgets/custom_text.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../controller/sound_controller.dart';
-import '../../utils/dimen_const.dart';
-import '../../utils/global.dart';
+
 import '../widgets/overlay_screen.dart';
 
 import '../../models/brick_breaker.dart';
@@ -32,116 +27,12 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   late final BrickBreaker game;
-  bool isAccepted = false;
-  bool isChecked = false;
-  String first = '';
 
   @override
   void initState() {
     super.initState();
     game = BrickBreaker();
     game.best.value = LocalStorage.instance.read(StorageKey.best.name) ?? 0;
-    first = LocalStorage.instance.read(StorageKey.first.name) ?? '';
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      try {
-        if (first == '') {
-          if (context.mounted) {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (ctx) => Builder(builder: (context) {
-                return StatefulBuilder(
-                  builder: (context, StateSetter setState) {
-                    return AlertDialog(
-                      surfaceTintColor: whiteColor,
-                      backgroundColor: whiteColor,
-                      content: SizedBox(
-                        height: 1.sh,
-                        width: 1.sw,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: WebViewWidget(
-                                  controller: WebViewController()
-                                    ..loadHtmlString(Global.language ==
-                                            Language.zh.name
-                                        ? Global.policyZh
-                                        : Global.language == Language.vi.name
-                                            ? Global.policyVi
-                                            : Global.language ==
-                                                    Language.hi.name
-                                                ? Global.policyHi
-                                                : Global.policyEn)),
-                            ),
-                            kSizedBoxH5,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Checkbox(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6)),
-                                  activeColor: secondaryColor,
-                                  side: BorderSide(
-                                    width: 1.5,
-                                    color: isChecked
-                                        ? secondaryColor
-                                        : Colors.black,
-                                  ),
-                                  value: isChecked,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                      if (isChecked) {
-                                        isAccepted = true;
-                                      } else {
-                                        isAccepted = false;
-                                      }
-                                    });
-                                  },
-                                ),
-                                Expanded(
-                                  child: CustomText(
-                                    text: 'agree'.tr,
-                                    color: secondaryColor,
-                                    fontSize: 11.sp,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            kSizedBoxH5,
-                            CustomButton(
-                              text: 'accept'.tr,
-                              size: 11.sp,
-                              width: 100.w,
-                              height: 25.h,
-                              isRounded: true,
-                              outlineColor:
-                                  isAccepted ? secondaryColor : greyColor,
-                              bgColor: isAccepted ? secondaryColor : greyColor,
-                              onTap: isAccepted
-                                  ? () async {
-                                      LocalStorage.instance.write(
-                                          StorageKey.first.name, 'notfirst');
-                                      Navigator.pop(context);
-                                    }
-                                  : null,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }),
-            );
-          }
-        }
-      } catch (e) {
-        // print("Error fetching SharedPreferences: $e");
-      }
-    });
   }
 
   @override
@@ -169,14 +60,36 @@ class _GameScreenState extends State<GameScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        exit(0);
+                        Navigator.of(context).pop();
                       },
-                      child: Image.asset(
-                        'assets/close.png',
-                        height: 38.w,
-                        width: 38.w,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/btn_bg.png",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: 35.w,
+                        width: 35.w,
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 24.w,
+                        ),
                       ),
                     ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     exit(0);
+                    //   },
+                    //   child: Image.asset(
+                    //     'assets/close.png',
+                    //     height: 38.w,
+                    //     width: 38.w,
+                    //   ),
+                    // ),
                     // CustomGameButton(
                     //   onTap: () {
                     //     exit(0);
@@ -191,31 +104,29 @@ class _GameScreenState extends State<GameScreen> {
                     // ),
                     BestCard(best: game.best),
                     ScoreCard(score: game.score),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => GameSettingScreen(
-                              game: game,
-                            ));
-                        game.pauseEngine();
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              "assets/btn_bg.png",
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        height: 35.w,
-                        width: 35.w,
-                        child: Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                          size: 24.w,
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     Get.to(() => const GameSettingScreen());
+                    //     game.pauseEngine();
+                    //   },
+                    //   child: Container(
+                    //     decoration: const BoxDecoration(
+                    //       image: DecorationImage(
+                    //         image: AssetImage(
+                    //           "assets/btn_bg.png",
+                    //         ),
+                    //         fit: BoxFit.cover,
+                    //       ),
+                    //     ),
+                    //     height: 35.w,
+                    //     width: 35.w,
+                    //     child: Icon(
+                    //       Icons.settings,
+                    //       color: Colors.white,
+                    //       size: 24.w,
+                    //     ),
+                    //   ),
+                    // ),
                     // CustomGameButton(
                     //   onTap: () {
                     //     Get.to(() => GameSettingScreen(

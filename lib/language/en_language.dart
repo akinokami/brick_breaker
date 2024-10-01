@@ -28,6 +28,7 @@ class EnLanguage {
     'tap_to_play': 'TAP TO PLAY',
     'arrow_swipe': 'Use arrow keys or swipe',
     'tap_to_play_again': 'Tap to Play Again',
-    'you_win': 'Y O U   W O N !'
+    'you_win': 'Y O U   W O N !',
+    'best': 'BEST'
   };
 }

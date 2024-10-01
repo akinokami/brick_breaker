@@ -26,6 +26,7 @@ class ViLanguage {
     'tap_to_play': 'NHẤN ĐỂ CHƠI',
     'arrow_swipe': 'Sử dụng phím mũi tên hoặc vuốt',
     'tap_to_play_again': 'Nhấn để chơi lại',
-    'you_win': 'BẠN Ố Ố Ố N!'
+    'you_win': 'BẠN Ố Ố Ố N!',
+    'best': 'TỐT NHẤT'
   };
 }

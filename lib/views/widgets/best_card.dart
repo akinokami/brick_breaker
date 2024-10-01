@@ -17,7 +17,7 @@ class BestCard extends StatelessWidget {
       valueListenable: best,
       builder: (context, best, child) {
         return CustomText(
-          text: "${'best'.tr}: $best".toUpperCase(),
+          text: "${'best'.tr} ${'score'.tr}: $best".toUpperCase(),
           fontSize: 14.sp,
           color: Colors.white,
           fontWeight: FontWeight.bold,

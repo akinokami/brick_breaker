@@ -28,6 +28,7 @@ class ZhLanguage {
     'tap_to_play': '點擊即可玩',
     'arrow_swipe': '使用箭頭鍵或滑動',
     'tap_to_play_again': '點擊再次播放',
-    'you_win': '你贏了 ！'
+    'you_win': '你贏了 ！',
+    'best': '最好的'
   };
 }
